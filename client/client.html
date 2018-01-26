@@ -178,6 +178,7 @@
             <th>ID</th>
             <th>Date</th>
             <th>Task</th>
+            <th>Complete</th>
           </tr>
           {
             this.state.items.map(function(item){
@@ -187,6 +188,12 @@
                   <td>{item.id}</td>
                   <td>{(new Date(item.date)).toLocaleString()}</td>
                   <td>{item.name}</td>
+                  <td><input id="checkbox" 
+                             type = "checkbox"
+                             checked = {item.complete==1}
+                             readOnly>
+                      </input>
+                  </td>
                 </tr>
               )
             })

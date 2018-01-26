@@ -45,6 +45,20 @@ function Todo() {
       });
     });
   };
+  this.complete = function(id,res) {
+    connection.acquire(function(err,con) {
+      con.query('update todo_list set complete = TRUE where id = ?', [id], function(err,result) {
+        con.release();
+        if (err) {
+          res.send({status:1, message:'TODO complete fail'});
+        } else {
+          res.send({status:0, message:'TODO complete success'});
+          console.log("Put successful");
+        }
+      });
+    });
+  };
+  
   this.delete = function(id,res) {
     connection.acquire(function(err,con) {
       con.query('delete from todo_list where id = ?', id, function(err,result) {

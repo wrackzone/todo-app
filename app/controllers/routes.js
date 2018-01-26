@@ -20,6 +20,10 @@ module.exports = {
     app.put('/todo/:id',function(req,res) {
       todo.update(req.body.name,req.params.id,res);
     });
+    app.put('/complete/:id',function(req,res) {
+      todo.complete(req.params.id,res);
+    });
+
     app.delete('/todo/:id',function(req,res) {
       todo.delete(req.params.id,res);
     });
