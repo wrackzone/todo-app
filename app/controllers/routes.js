@@ -1,7 +1,13 @@
 var todo = require('../models/todo');
+var path = require('path');
 
 module.exports = {
   configure: function(app) {
+
+    app.get('/client',function(req,res) {
+      res.sendFile(path.join(__dirname+ '/../../client/client.html'));
+    });
+
     app.get('/todo',function(req,res) {
       todo.get(res);
     });
