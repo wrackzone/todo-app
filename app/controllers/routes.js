@@ -21,6 +21,7 @@ module.exports = {
       todo.update(req.body.name,req.params.id,res);
     });
     app.put('/complete/:id',function(req,res) {
+      console.log("complete called with ",req.params.id);
       todo.complete(req.params.id,res);
     });
 
