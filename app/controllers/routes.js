@@ -2,6 +2,9 @@ var todo = require('../models/todo');
 
 module.exports = {
   configure: function(app) {
+    app.get('/',function(req,res) {
+      todo.get(res);
+    });
     app.get('/todo',function(req,res) {
       todo.get(res);
     });
