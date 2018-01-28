@@ -1,0 +1,11 @@
+applications:
+- name: my-todo-app-v2
+  command: node app.js
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: my-todo-app.cfapps.io
+  services:
+  - my-todo-mysql
+  stack: cflinuxfs2
