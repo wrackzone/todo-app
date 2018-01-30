@@ -156,13 +156,14 @@
 
       refresh() {
 
-
         fetch(`/todo`) 
             .then( (response) => response.json())
             .then((responseJson) => {
               this.setState({items:responseJson});
               // randomly complete an item.
-              if (getRandomInt(0,1) == 0) {
+              var x = (getRandomInt(0,3))
+              console.log("x",x);
+              if (x > 0) {
                 var id = getRandomInt(0,this.state.items.length);
                 var itemId = this.state.items[id].id
                 console.log("completing item:",itemId);

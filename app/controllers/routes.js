@@ -7,7 +7,9 @@ module.exports = {
     app.get('/client',function(req,res) {
       res.sendFile(path.join(__dirname+ '/../../client/client.html'));
     });
-
+    app.get('/',function(req,res) {
+      todo.get(res);
+    });
     app.get('/todo',function(req,res) {
       todo.get(res);
     });
