@@ -1,9 +1,9 @@
 applications:
 - name: my-todo-app-v1
   command: node app.js
-  disk_quota: 1G
+  disk_quota: 128MB
   instances: 1
-  memory: 1G
+  memory: 128MB
   routes:
   - route: my-todo-app.cfapps.io
   services:

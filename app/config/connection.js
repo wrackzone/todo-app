@@ -9,7 +9,7 @@ function Connection() {
     var vcs = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) 
       : { "cleardb" : [{
         "credentials" : {
-          hostname : "bmullan-mbr",
+          hostname : "bmullan-mbr.local",
           username : "root",
           password : "",
           name : "todo"

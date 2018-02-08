@@ -44,6 +44,12 @@
     tr td:hover { background: #666; color: #FFF; }  
     /* Hover cell effect! */
 
+    .boxed {
+      border: 1px solid silver ;
+      margin: 5px;
+      padding: 3px;
+    }
+
   </style>
   <body>
     <div id="root"></div>
@@ -51,6 +57,79 @@
 
     var nouns = ["milk","cat","dog","interview","book","race"];
     var verbs = ["Get","Walk","Talk","Ace","Read","Run"];
+
+    class Timer extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { interval : props.interval,
+          counter : 0,
+          timerID : setInterval(
+            () => this.tick(), props.interval) 
+        }
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.getState().timerID);
+      }
+
+      tick() {
+        var state = this.state;
+        this.setState({
+          interval : state.interval,
+          counter : state.counter+1,
+          timerID : state.timerID})
+        console.log("tick!",this.state);
+      }
+      
+      render() {
+        return (
+          <span>
+          {this.state.counter}
+          </span>
+        )
+      }
+
+    }
+
+    class Slider extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { value : props.value, 
+          min : props.min,
+          max : props.max,
+          step : props.step
+        }
+      }
+
+      handleChange(val) {
+        var state = this.state;
+        this.setState({
+          value : val.target.value, 
+            min : state.min,
+            max : state.max,
+            step : state.step
+        })
+        console.log("change",val.target.value);
+
+      }
+
+      render() {
+        return (
+          <span>
+          <input type="range" 
+            value={this.state.value}
+            min={this.state.min} 
+            max={this.state.max} 
+            step={this.state.step}
+            onChange={this.handleChange.bind(this)}
+            >
+          </input>
+          <span class="boxed">{this.state.value}</span>
+          </span>
+        )
+      }
+
+    }
 
     class Poster extends React.Component {
       constructor(props) {
@@ -93,7 +172,7 @@
       toggle(toggle) {
         if (toggle) {
           this.timerID = setInterval(
-            () => this.tick(), 1000
+            () => this.tick(), 500
           )
         }
         else {
@@ -171,6 +250,8 @@
         console.log("label state",this.state);
         return (
           <span>
+          <Slider min="0" max="5" step="1" value="0"/>
+          {/* <Timer interval="100"></Timer> */}
           <Poster refresh={this.refresh.bind(this)}/>
           <table border="1">
           <tbody>
