@@ -2,5 +2,8 @@
 app/.DS_Store
 node_modules/
 .DS_Store
+.dockerignore
+Dockerfile
+dall.sh
 demo-script
-
+mysql.json

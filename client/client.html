@@ -44,6 +44,13 @@
     tr td:hover { background: #666; color: #FFF; }  
     /* Hover cell effect! */
 
+    .boxed {
+      border: 1px solid silver ;
+      margin: 5px;
+      padding: 3px;
+    }
+
+
   </style>
   <body>
     <div id="root"></div>
@@ -56,11 +63,44 @@
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    class Slider extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { value : props.value, 
+          min : props.min,
+          max : props.max,
+          step : props.step
+        }
+      }
+      handleChange(val) {
+        var state = this.state;
+        this.setState({
+          value : val.target.value
+        })
+        console.log("change",val.target.value);
+      }
+      render() {
+        return (
+          <span>
+          <input type="range" 
+            value={this.state.value}
+            min={this.state.min} 
+            max={this.state.max} 
+            step={this.state.step}
+            onChange={this.handleChange.bind(this)}
+            >
+          </input>
+          <span className="boxed">{this.state.value}</span>
+          </span>
+        )
+      }
+    }
+
 
     class Poster extends React.Component {
       constructor(props) {
         super(props);
-        this.state = { returnCode : "", id : 0, errors: 0, refresh : props.refresh }
+        this.state = { returnCode : "", id : 0, errors: 0, refresh : props.refresh, rate : 1 }
       }
 
       componentDidMount() {
@@ -95,10 +135,14 @@
         });
       }
 
+      changeRate(rate) {
+
+      }
+
       toggle(toggle) {
         if (toggle) {
           this.timerID = setInterval(
-            () => this.tick(), 1000
+            () => this.tick(), (1000 / this.state.rate)
           )
         }
         else {
@@ -109,6 +153,7 @@
       render() {
         return (
           <span>
+            <Slider min="0" max="5" step="1" value="0"/>
             <Toggle toggle={this.toggle.bind(this)}/>
             <table><tbody>
               <tr>

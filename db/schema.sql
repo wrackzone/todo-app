@@ -1,4 +1,4 @@
-use ad_7b8adaf6e3769d0;
+use todo;
 
 CREATE TABLE `todo_list` (
 	`id` INT NOT NULL AUTO_INCREMENT,

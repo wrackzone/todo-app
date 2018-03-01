@@ -6,6 +6,8 @@ function Connection() {
   this.init = function() {
 
     // use bound settings
+    // "{ cleardb : [{credentials:{ hostname : 'localhost',username:'root',password:'admin',name:'todo'}}]}"
+
     var vcs = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) 
       : { "cleardb" : [{
         "credentials" : {
@@ -16,7 +18,13 @@ function Connection() {
         }
       }]};
 
-    console.log("vcs",vcs);
+    console.log("vcs",JSON.stringify(vcs));
+
+    console.log("hostname", vcs.cleardb[0].credentials.hostname);
+    console.log("user", vcs.cleardb[0].credentials.username);
+    console.log("password", vcs.cleardb[0].credentials.password);
+    console.log("name", vcs.cleardb[0].credentials.name);
+
 
     this.pool = mysql.createPool({
       connectionLimit: 10,
